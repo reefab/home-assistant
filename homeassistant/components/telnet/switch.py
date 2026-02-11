@@ -127,7 +127,10 @@ class TelnetSwitch(SwitchEntity):
                 'Command "%s" failed with exception: %s', command, repr(error)
             )
             return None
-        _LOGGER.debug("telnet response: %s", response.decode("ASCII").strip())
+        _LOGGER.debug(
+            "telnet response: %s",
+            response.decode("ASCII", errors="backslashreplace").strip(),
+        )
         return response.decode("ASCII").strip()
 
     def update(self) -> None:
